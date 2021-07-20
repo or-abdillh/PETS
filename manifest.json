@@ -1,0 +1,16 @@
+{
+  "name": "PETS, lets find random your pet cute pictures",
+  "short_name": "PETS",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "orientation": "portrait",
+  "scope": "/",
+  "start_url": "index.html",
+  "icons": [
+    {
+      "src": "public/assets/icons/pets.jpg",
+      "sizes": "72x72",
+      "type": "image/png"
+        }
+    ]
+}
