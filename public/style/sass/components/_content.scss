@@ -41,6 +41,11 @@
         text-decoration: none;
         color: whitesmoke;
         font-size: .65em;
+        transition: .3s;
+        
+        &:active {
+          letter-spacing: 3px;
+        }
       }
     }
     
