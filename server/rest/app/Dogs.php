@@ -23,9 +23,9 @@ class Dogs extends Rest {
     return $this->dog;
   }
   
-  public function getDogs($limit = 1)
+  public function getDogs()
   {
-    $response = parent::reqInterval($limit, $this->endpoint);
+    $response = parent::multiReq($this->endpoint);
     $response = $this->modify($response);
     $response = parent::getJSON($response);
     
@@ -40,7 +40,7 @@ class Dogs extends Rest {
     $results = json_decode( json_encode($JSON), true);
     $urls = [];
     
-    foreach( $results as $item )
+    foreach( $results["results"] as $item )
     {
       $url = ["url" => $item["message"]];
       $urls[] = $url;

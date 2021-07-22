@@ -26,9 +26,9 @@ class Cats extends Rest {
   
   //Setter and Getter
   //Return many response
-  public function getCats($limit = 1)
+  public function getCats()
   {
-    $response = parent::reqInterval($limit, $this->endpoint);
+    $response = parent::multiReq($this->endpoint);
     $response = $this->modify($response);
     $response = parent::getJSON($response);
     $this->cats = $response;
@@ -42,7 +42,7 @@ class Cats extends Rest {
     $results = json_decode( json_encode($JSON), true);
     $urls = [];
     
-    foreach ($results as $item)
+    foreach ($results["results"] as $item)
     {
       $url = ["url" => $item[0]["url"]];
       $urls[] = $url;

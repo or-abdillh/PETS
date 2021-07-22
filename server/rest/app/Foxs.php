@@ -23,9 +23,9 @@ class Foxs extends Rest {
     return $this->fox;
   }
   
-  public function getFoxs($limit = 1)
+  public function getFoxs()
   {
-    $response = parent::reqInterval($limit, $this->endpoint);
+    $response = parent::multiReq($this->endpoint);
     $response = $this->modify($response);
     $response = parent::getJSON($response);
     
@@ -40,7 +40,7 @@ class Foxs extends Rest {
     $results = json_decode( json_encode($JSON), true);
     $urls = [];
     
-    foreach( $results as $item )
+    foreach( $results["results"] as $item )
     {
       $url = ["url" => $item["image"]];
       $urls[] = $url;
