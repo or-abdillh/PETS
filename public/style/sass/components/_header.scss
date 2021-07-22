@@ -54,6 +54,7 @@
     margin-top: 0!important;
     background: white!important;
     margin-bottom: 1rem;
+    //box-shadow: $shadow;
   }
   
   .categorys {
@@ -86,7 +87,6 @@
     }
     
     .active {
-      //border-bottom: 5px solid $border;
       color: $textMain;
       font-weight: 700;
       letter-spacing: 3px;
