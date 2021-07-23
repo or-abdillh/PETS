@@ -83,6 +83,8 @@ class Rest {
     $ch6 = curl_init($endpoint);
     $ch7 = curl_init($endpoint);
     $ch8 = curl_init($endpoint);
+    $ch9 = curl_init($endpoint);
+    $ch10 = curl_init($endpoint);
     
     //Setopt
     curl_setopt($ch1, CURLOPT_RETURNTRANSFER, true);
@@ -93,6 +95,8 @@ class Rest {
     curl_setopt($ch6, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch7, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch8, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch9, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch10, CURLOPT_RETURNTRANSFER, true);
     
     //create the multiple cURL handle
     $mh = curl_multi_init();
@@ -106,6 +110,8 @@ class Rest {
     curl_multi_add_handle($mh,$ch6);
     curl_multi_add_handle($mh,$ch7);
     curl_multi_add_handle($mh, $ch8);
+    curl_multi_add_handle($mh, $ch9);
+    curl_multi_add_handle($mh, $ch10);
     
     
     //execute the multi handle
@@ -125,6 +131,8 @@ class Rest {
     curl_multi_remove_handle($mh, $ch6);
     curl_multi_remove_handle($mh, $ch7);
     curl_multi_remove_handle($mh, $ch8);
+    curl_multi_remove_handle($mh, $ch9);
+    curl_multi_remove_handle($mh, $ch10);
     curl_multi_close($mh);
     
     // all of our requests are done, we can now access the results
@@ -136,7 +144,9 @@ class Rest {
       json_decode( curl_multi_getcontent($ch5), true),
       json_decode( curl_multi_getcontent($ch6), true),
       json_decode( curl_multi_getcontent($ch7), true),
-      json_decode( curl_multi_getcontent($ch8), true)
+      json_decode( curl_multi_getcontent($ch8), true),
+      json_decode( curl_multi_getcontent($ch9), true),
+      json_decode( curl_multi_getcontent($ch10), true)
     ];
     
     $results = ["results" => $results];

@@ -14,17 +14,17 @@ if ( isset($_GET["category"]) )
   {
     case "cat" : 
       $Cats = new Cats();
-      echo $Cats->getCats($limit);
+      echo $Cats->getCats();
     break;
     
     case "dog" :
       $Dogs = new Dogs();
-      echo $Dogs->getDogs($limit);
+      echo $Dogs->getDogs();
     break;
     
     case "fox" :
       $Foxs = new Foxs();
-      echo $Foxs->getFoxs($limit);
+      echo $Foxs->getFoxs();
     break;
     
     default :

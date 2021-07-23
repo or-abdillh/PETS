@@ -18,8 +18,6 @@ document.addEventListener('click', function(el) {
     
     //Generate info to modal
     Modal.img.setAttribute('src', urlImg);
-    Modal.download.dataset.url = urlImg;
-    Modal.share.dataset.url = urlImg;
     
     setTimeout(function() {
       Modal.parent.classList.toggle('modal-show');
@@ -28,8 +26,9 @@ document.addEventListener('click', function(el) {
   
   //Download modal button
   if (role == 'download') {
+    
     setTimeout(function() {
-      changeHref(urlImg);
+      changeHref(Modal.img.getAttribute('src'));
     }, 400);
   }
   
@@ -37,8 +36,8 @@ document.addEventListener('click', function(el) {
   if (role == 'share') {
     if (navigator.share) {
       navigator.share({
-        title: 'Random pets image',
-        url: urlImg
+        title: 'Random Pets Image',
+        url: Modal.img.getAttribute('src')
       }).then(result => {
         console.log(result)
       }).catch(err => {

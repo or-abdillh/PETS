@@ -109,21 +109,21 @@
   min-height: 120vh;
   background: white !important;
   border-radius: 0 3rem 0 0;
-  padding: 2rem 1rem;
+  padding: 1rem 1rem;
   columns: 2;
   column-gap: 0.5rem;
 }
 .content .item {
-  background: #F5F5F5;
+  background: #A7FFDB;
   height: auto;
   border-radius: 1rem;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.55rem;
   overflow: hidden;
   font-size: 0;
   line-height: 0;
   break-inside: avoid;
   position: relative;
-  box-shadow: 6px 6px 12px lightgrey;
+  box-shadow: -5px 5px 10px lightgray;
 }
 .content .item img {
   max-width: 100%;
@@ -209,6 +209,7 @@
 }
 .modal-body .modal-action i {
   display: block;
+  text-decoration: none;
   width: 50px;
   height: 50px;
   background: white;
