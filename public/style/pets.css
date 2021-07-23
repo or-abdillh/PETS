@@ -14,7 +14,7 @@
 /* CONTAINER STYLE */
 .container {
   width: 100%;
-  min-height: 150vh;
+  min-height: 100vh;
   position: relative;
   background-image: linear-gradient(to left, #A7FFDB 50%, white 50%);
 }
@@ -153,6 +153,17 @@
 }
 .content .item:hover .layer, .content .item:active .layer {
   opacity: 1;
+}
+.content .load-more {
+  text-align: center;
+}
+.content .load-more a {
+  color: #3C3C3C;
+  transition: 0.3s ease;
+}
+.content .load-more a:active {
+  letter-spacing: 3px;
+  color: #A08F8F;
 }
 
 .modal-show {

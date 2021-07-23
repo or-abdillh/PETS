@@ -37,12 +37,11 @@ class Cats extends Rest {
   }
   
   //Modify results JSON
-  private function modify($JSON)
+  private function modify($array)
   {
-    $results = json_decode( json_encode($JSON), true);
     $urls = [];
     
-    foreach ($results["results"] as $item)
+    foreach ($array["results"] as $item)
     {
       $url = ["url" => $item[0]["url"]];
       $urls[] = $url;

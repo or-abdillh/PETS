@@ -35,12 +35,11 @@ class Dogs extends Rest {
   }
   
   //Modifikasi JSON
-  private function modify($JSON)
+  private function modify($array)
   {
-    $results = json_decode( json_encode($JSON), true);
     $urls = [];
     
-    foreach( $results["results"] as $item )
+    foreach( $array["results"] as $item )
     {
       $url = ["url" => $item["message"]];
       $urls[] = $url;

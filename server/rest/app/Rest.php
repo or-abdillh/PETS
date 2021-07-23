@@ -71,60 +71,79 @@ class Rest {
     return json_encode($JSON);
   }
   
-  //Request 10 times
+  //Request 8 pets
   public function multiReq($endpoint)
   {
-    //Make curl_init
-    // ch == Curl Http
-    $ch_1 = $ch_2 = $ch_3 = $ch_4 = $ch_5 = $ch_6 = $ch_7 = $ch_8 = $ch_9 = $ch_10 = curl_init();
-    $vars = [$ch_1, $ch_2, $ch_3, $ch_4, $ch_5, $ch_6, $ch_7, $ch_8, $ch_9, $ch_10];
     
-    //Make options
-    foreach ($vars as $var)
-    {
-      curl_setopt($var, CURLOPT_URL, $endpoint);
-      curl_setopt($var, CURLOPT_RETURNTRANSFER, true);
-    }
+    $ch1 = curl_init($endpoint);
+    $ch2 = curl_init($endpoint);
+    $ch3 = curl_init($endpoint);
+    $ch4 = curl_init($endpoint);
+    $ch5 = curl_init($endpoint);
+    $ch6 = curl_init($endpoint);
+    $ch7 = curl_init($endpoint);
+    $ch8 = curl_init($endpoint);
     
-    //init multi_init
+    //Setopt
+    curl_setopt($ch1, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch2, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch3, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch4, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch5, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch6, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch7, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch8, CURLOPT_RETURNTRANSFER, true);
+    
+    //create the multiple cURL handle
     $mh = curl_multi_init();
     
-    //Add multi_handle
-    foreach ($vars as $var)
-    {
-      curl_multi_add_handle($mh, $var);
-    }
+    //add the two handles
+    curl_multi_add_handle($mh,$ch1);
+    curl_multi_add_handle($mh,$ch2);
+    curl_multi_add_handle($mh,$ch3);
+    curl_multi_add_handle($mh,$ch4);
+    curl_multi_add_handle($mh,$ch5);
+    curl_multi_add_handle($mh,$ch6);
+    curl_multi_add_handle($mh,$ch7);
+    curl_multi_add_handle($mh, $ch8);
     
-    //Execute multi handle
-    do 
-    {
-      $status = curl_multi_exec($mh, $active);
-      
-      if ($active)
-      {
-        curl_multi_select($mh);
-      }
-    } while ( $active && $status == CURLM_OK);
     
-    //Close multi handles
-    foreach ($vars as $var)
-    {
-      curl_multi_remove_handle($mh, $var);
-    }
+    //execute the multi handle
+    do {
+        $status = curl_multi_exec($mh, $active);
+        if ($active) {
+            curl_multi_select($mh);
+        }
+    } while ($active && $status == CURLM_OK);
+    
+    //close the handles
+    curl_multi_remove_handle($mh, $ch1);
+    curl_multi_remove_handle($mh, $ch2);
+    curl_multi_remove_handle($mh, $ch3);
+    curl_multi_remove_handle($mh, $ch4);
+    curl_multi_remove_handle($mh, $ch5);
+    curl_multi_remove_handle($mh, $ch6);
+    curl_multi_remove_handle($mh, $ch7);
+    curl_multi_remove_handle($mh, $ch8);
     curl_multi_close($mh);
     
-    //Get results
-    $results = [];
-    foreach ($vars as $var)
-    {
-      $results[] = json_decode( curl_multi_getcontent($var), true );
-    }
+    // all of our requests are done, we can now access the results
+    $results = [ 
+      json_decode( curl_multi_getcontent($ch1), true),
+      json_decode( curl_multi_getcontent($ch2), true),
+      json_decode( curl_multi_getcontent($ch3), true),
+      json_decode( curl_multi_getcontent($ch4), true),
+      json_decode( curl_multi_getcontent($ch5), true),
+      json_decode( curl_multi_getcontent($ch6), true),
+      json_decode( curl_multi_getcontent($ch7), true),
+      json_decode( curl_multi_getcontent($ch8), true)
+    ];
     
     $results = ["results" => $results];
-    
-    //Output
+    // output results
     return $results;
   }
+  
   
   //Response for bad request
   public function badRequest($description)
