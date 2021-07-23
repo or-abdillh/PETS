@@ -126,23 +126,6 @@ class Rest {
     return $results;
   }
   
-  //Return as array
-  public function reqInterval($count = 1, $endpoint)
-  {
-    $array = [];
-    //Max request 10
-    $limit = $count <= 10 ? $count : 10;
-    
-    for ( $x = 0; $x < $limit; $x++)
-    {
-      $response = $this->request($endpoint);
-      //Push $response to $array
-      $array[] = $response;
-    }
-    
-    return $array;
-  }
-  
   //Response for bad request
   public function badRequest($description)
   {
