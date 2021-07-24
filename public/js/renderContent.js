@@ -2,18 +2,31 @@ const endpoint = "http://localhost:8000/PETS/server/rest/";
 const boxContent = document.querySelector('.content');
 
 //Template item
-function makeItem(url, category) {
+
+function makeElement(url, category, parent) {
   
-  let template = `
-    <div class="item">
-      <img src=${url} alt=${category} />
-      <div class="layer">
-        <a data-url=${url} data-role="triger" data-target="modal">Click to view</a>
-      </div>
-    </div>
-  `;
+  //Create element
+  let item = document.createElement('div');
+  let img = document.createElement('img');
+  let layer = document.createElement('div');
+  let anchor = document.createElement('a');
   
-  return template;
+  //Set class and atribute
+  item.classList.add('item');
+  img.setAttribute('src', url);
+  img.setAttribute('alt', category);
+  layer.classList.add('layer');
+  anchor.setAttribute('data-role', 'triger');
+  anchor.setAttribute('data-url', url);
+  
+  //Append
+  item.appendChild(img);
+  item.appendChild(layer);
+  layer.appendChild(anchor);
+  anchor.innerHTML = 'Click to view';
+  
+  //Append to parent
+  parent.appendChild(item);
 }
 
 function makeLoadMore() {
@@ -22,13 +35,6 @@ function makeLoadMore() {
       <a data-role="load-more">Load more</a>
      </div>
   `;
-}
-
-//Template variabel
-let PETS = {
-  category: '',
-  length: 0,
-  results: []
 }
 
 //FETCH saat pertama kali masuk ke app
@@ -47,18 +53,13 @@ window.addEventListener('load', () => {
     .then( async response => {
       
       try {
-        let itemArray = [];
         let data = await response.json();
         let category = data.category;
         data = data.results;
         
         data.forEach(item => {
-          itemArray.push(
-            makeItem(item.url, category)
-            );
-        })
-        
-        boxContent.innerHTML = itemArray.join('');
+          makeElement(item.url, category, boxContent);
+        });
         
       } catch (err) {
         alert(err)
