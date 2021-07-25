@@ -32,6 +32,8 @@ const changeThemeColor = function() {
 }
 
 //Dynamic Position
+//Main Code
+let content = document.querySelector('.content');
 window.addEventListener('scroll', function() {
   
   let Header = {

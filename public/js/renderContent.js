@@ -1,4 +1,5 @@
-const endpoint = "http://localhost:8000/PETS/server/rest/";
+//const endpoint = "http://localhost:8000/PETS/server/rest/";
+const endpoint = "../assets/json/pets.json";
 const boxContent = document.querySelector('.content');
 
 //Template item
@@ -29,18 +30,56 @@ function makeElement(url, category, parent) {
   parent.appendChild(item);
 }
 
-function makeLoadMore() {
-  return `
-    <div class="load-more">
-      <a data-role="load-more">Load more</a>
-     </div>
-  `;
+//Save response to LocalStorage
+function saveIntoLocal(json, pet = 'cat') {
+ 
+  let data = {
+    category: pet,
+    results: json
+  };
+  
+  let key = `PETS_${pet.toUpperCase()}S`;
+  localStorage.setItem(
+    key,
+    JSON.stringify(data)
+    );
 }
 
-//FETCH saat pertama kali masuk ke app
-//Simpan semua hasil fetch tiap category ke dalam local storage
-// (**) PETS_CATS , PETS_DOGS , PETS_FOXS
+//Request data
+function renderData(str = "") {
+  
+  let param = '?category=' + str;
+  fetch('./public/assets/json/pets.json')
+    .then(async response => {
+      try {
+        let data = await response.json();
+        let category = data.category;
+        data = data.results;
+        
+        //Save into local storage
+        saveIntoLocal(data, str);
+        
+        //Render element
+        data.forEach(item => {
+          makeElement(item.url, category, boxContent);
+        });
+        
+      } catch (err) {
+        console.log(err)
+      }
+    });
+}
 
+//Menu category apa yang aktif
+function checkActiveMenu() {
+  
+  const menuCategorys = document.querySelectorAll('[data-role=menu]');
+  for (const menu of menuCategorys) {
+    if (menu.classList.contains('active')) return menu.dataset.index;
+  }
+}
+
+//Render content saat pertama kali di load
 window.addEventListener('load', () => {
   
   //menghapus variabel (**) jika sudah ada
@@ -48,21 +87,8 @@ window.addEventListener('load', () => {
     localStorage.removeItem('PETS_CATS', 'PETS_DOGS', 'PETS_FOXS');
   }
   
+  
   //Fetch API CAT
-  fetch(endpoint + "?category=cat")
-    .then( async response => {
-      
-      try {
-        let data = await response.json();
-        let category = data.category;
-        data = data.results;
-        
-        data.forEach(item => {
-          makeElement(item.url, category, boxContent);
-        });
-        
-      } catch (err) {
-        alert(err)
-      }
-    })
+  renderData('cat');
+  
 })
