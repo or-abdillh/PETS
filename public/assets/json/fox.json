@@ -1,0 +1,53 @@
+{
+  "code": 200,
+  "message": "success",
+  "category": "fox",
+  "length": 15,
+  "results": [
+    {
+      "url": "https://randomfox.ca/images/65.jpg"
+        },
+    {
+      "url": "https://randomfox.ca/images/116.jpg"
+        },
+    {
+      "url": "https://randomfox.ca/images/79.jpg"
+        },
+    {
+      "url": "https://randomfox.ca/images/7.jpg"
+        },
+    {
+      "url": "https://randomfox.ca/images/53.jpg"
+        },
+    {
+      "url": "https://randomfox.ca/images/4.jpg"
+        },
+    {
+      "url": "https://randomfox.ca/images/6.jpg"
+        },
+    {
+      "url": "https://randomfox.ca/images/22.jpg"
+        },
+    {
+      "url": "https://randomfox.ca/images/54.jpg"
+        },
+    {
+      "url": "https://randomfox.ca/images/86.jpg"
+        },
+    {
+      "url": "https://randomfox.ca/images/5.jpg"
+        },
+    {
+      "url": "https://randomfox.ca/images/109.jpg"
+        },
+    {
+      "url": "https://randomfox.ca/images/99.jpg"
+        },
+    {
+      "url": "https://randomfox.ca/images/6.jpg"
+        },
+    {
+      "url": "https://randomfox.ca/images/40.jpg"
+        }
+    ]
+}

@@ -43,7 +43,7 @@ class Cats extends Rest {
     
     foreach ($array["results"] as $item)
     {
-      $url = ["url" => $item[0]["url"]];
+      $url = ["url" => $item["file"]];
       $urls[] = $url;
     }
     

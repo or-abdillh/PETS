@@ -2,6 +2,11 @@
 //Require file init.php
 require_once('app/init.php');
 
+//Backend have a problem
+echo "{'code' : 501, 'message' : 'Internal server error'}";
+die();
+
+
 //Valid request format
 // server/rest/?category=cat
 

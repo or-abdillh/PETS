@@ -1,0 +1,53 @@
+{
+  "code": 200,
+  "message": "success",
+  "category": "dog",
+  "length": 15,
+  "results": [
+    {
+      "url": "https://images.dog.ceo/breeds/pitbull/20190710_143021.jpg"
+        },
+    {
+      "url": "https://images.dog.ceo/breeds/pointer-germanlonghair/hans3.jpg"
+        },
+    {
+      "url": "https://images.dog.ceo/breeds/brabancon/n02112706_86.jpg"
+        },
+    {
+      "url": "https://images.dog.ceo/breeds/terrier-australian/n02096294_67.jpg"
+        },
+    {
+      "url": "https://images.dog.ceo/breeds/lhasa/n02098413_8001.jpg"
+        },
+    {
+      "url": "https://images.dog.ceo/breeds/greyhound-italian/n02091032_1100.jpg"
+        },
+    {
+      "url": "https://images.dog.ceo/breeds/bouvier/n02106382_1623.jpg"
+        },
+    {
+      "url": "https://images.dog.ceo/breeds/akita/An_Akita_Inu_resting.jpg"
+        },
+    {
+       "url": "https://images.dog.ceo/breeds/maltese/n02085936_1155.jpg"
+        },
+    {
+       "url": "https://images.dog.ceo/breeds/poodle-toy/n02113624_1832.jpg"
+        },
+    {
+       "url": "https://images.dog.ceo/breeds/wolfhound-irish/n02090721_1131.jpg"
+        },
+    {
+       "url": "https://images.dog.ceo/breeds/terrier-bedlington/n02093647_3338.jpg"
+        },
+    {
+       "url": "https://images.dog.ceo/breeds/terrier-yorkshire/n02094433_4167.jpg"
+        },
+    {
+       "url": "https://images.dog.ceo/breeds/groenendael/n02105056_7291.jpg"
+        },
+    {
+       "url": "https://images.dog.ceo/breeds/weimaraner/n02092339_286.jpg"
+        }
+    ]
+}

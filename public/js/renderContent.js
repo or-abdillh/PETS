@@ -31,33 +31,45 @@ function makeElement(url, category, parent) {
 }
 
 //Save response to LocalStorage
-function saveIntoLocal(json, pet = 'cat') {
+function saveIntoLocal(json) {
  
   let data = {
-    category: pet,
-    results: json
+    lastUpdate: new Date(),
+    results: []
   };
   
-  let key = `PETS_${pet.toUpperCase()}S`;
+  if (json !== '') data.results.push(json)
+  
   localStorage.setItem(
-    key,
+    'PETS',
     JSON.stringify(data)
     );
+}
+
+//Cek apakah lastUpdate > 5 menit
+function checkLastUpdate(lastUpdate) {
+  
+  let now = parseInt(new Date().getTime());
+  let last = parseInt(new Date(lastUpdate).getTime());
+  
+  if ( now - last > 30) return true;
+  else return false;
 }
 
 //Request data
 function renderData(str = "") {
   
   let param = '?category=' + str;
-  fetch('./public/assets/json/pets.json')
+  fetch('./public/assets/json/' + str + '.json')
     .then(async response => {
       try {
         let data = await response.json();
-        let category = data.category;
-        data = data.results;
         
         //Save into local storage
-        saveIntoLocal(data, str);
+        saveIntoLocal(data);
+        
+        let category = data.category;
+        data = data.results;
         
         //Render element
         data.forEach(item => {
@@ -83,12 +95,25 @@ function checkActiveMenu() {
 window.addEventListener('load', () => {
   
   //menghapus variabel (**) jika sudah ada
-  if (localStorage.getItem('PETS_CATS') && localStorage.getItem('PETS_DOGS') && localStorage.getItem('PETS_FOXS')) {
-    localStorage.removeItem('PETS_CATS', 'PETS_DOGS', 'PETS_FOXS');
+  if (localStorage.getItem('PETS') ) {
+    
+    //Cek last update property
+    let pets = JSON.parse(localStorage.getItem('PETS'));
+    let param = checkLastUpdate(pets.lastUpdate)
+    
+    if (param) {
+      //Fetch API CAT
+      renderData('fox');
+    } else {
+      //Render from local storage
+      pets = pets.results;
+      pets.forEach(item => {
+        if (item.category == 'fox') {
+          makeElement(item.url, 'fox')
+        }
+      })
+    }
+  } else {
+    renderData('fox')
   }
-  
-  
-  //Fetch API CAT
-  renderData('cat');
-  
 })

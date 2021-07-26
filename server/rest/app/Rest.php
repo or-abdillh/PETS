@@ -4,7 +4,7 @@
 class Rest {
   
   //Endpoint URL
-  protected $catsUrl = 'https://api.thecatapi.com/v1/images/search?has_breeds=0';
+  protected $catsUrl = 'http://aws.random.cat/meow';
   protected $dogsUrl = 'https://dog.ceo/api/breeds/image/random';
   protected $foxsUrl = 'https://randomfox.ca/floof/';
   
