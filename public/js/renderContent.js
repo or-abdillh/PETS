@@ -75,8 +75,14 @@ for (const item of categorys ) {
     
     let index = this.dataset.index;
     
-    boxContent.innerHTML = '';
-    renderData(index)
+    boxContent.classList.add('fade-in');
+    setTimeout(function(){
+      
+      boxContent.innerHTML = '';
+      renderData(index)
+      }, 400)
+      
+    boxContent.classList.remove('fade-in')
   })
 }
 
