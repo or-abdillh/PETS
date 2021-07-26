@@ -1,5 +1,3 @@
-//const endpoint = "http://localhost:8000/PETS/server/rest/";
-const endpoint = "../assets/json/";
 const boxContent = document.querySelector('.content');
 
 //Template item
@@ -30,49 +28,19 @@ function makeElement(url, category, parent) {
   parent.appendChild(item);
 }
 
-//Save response to LocalStorage
-function saveIntoLocal(json) {
- 
-  let data = {
-    lastUpdate: new Date(),
-    results: []
-  };
-  
-  if (json !== '') data.results.push(json)
-  
-  localStorage.setItem(
-    'PETS',
-    JSON.stringify(data)
-    );
-}
-
-//Cek apakah lastUpdate > 5 menit
-function checkLastUpdate(lastUpdate) {
-  
-  let now = parseInt(new Date().getTime());
-  let last = parseInt(new Date(lastUpdate).getTime());
-  
-  if ( now - last > 300_000) return true;
-  else return false;
-}
-
 //Request data
 function renderData(str = "") {
   
-  let param = '?category=' + str;
   fetch('./public/assets/json/' + str + '.json')
-    .then(async response => {
+    .then(async res => {
       try {
-        let data = await response.json();
+        let response = await res.json();
         
-        //Save into local storage
-        saveIntoLocal(data);
-        
-        let category = data.category;
-        data = data.results;
+        let category = response.category;
+        response = response.results;
         
         //Render element
-        data.forEach(item => {
+        response.forEach(item => {
           makeElement(item.url, category, boxContent);
         });
         
@@ -94,40 +62,21 @@ function checkActiveMenu() {
 //Render content saat pertama kali di load
 window.addEventListener('load', () => {
   
-  //menghapus variabel (**) jika sudah ada
-  if (localStorage.getItem('PETS') ) {
-    
-    //Cek last update property
-    let pets = JSON.parse(localStorage.getItem('PETS'));
-    let param = checkLastUpdate(pets.lastUpdate)
-    
-    if (param) {
-      //Delete local storage PETS
-      localStorage.removeItem('PETS');
-      //Fetch API CAT
-      renderData(
-        checkActiveMenu()
-      );
-    } else {
-      //Render from local storage
-      pets = pets.results;
-      pets.forEach(item => {
-        
-        if (item.category == checkActiveMenu()) {
-          let images = item.results;
-          images.forEach(img => {
-            makeElement(img.url, checkActiveMenu(), boxContent);
-          })
-        }
-      })
-    }
-  } else {
-    //Delete local storage PETS
-    localStorage.removeItem('PETS');
-    renderData(
-      checkActiveMenu()
-      );
-  }
+  //Render data 
+  renderData(checkActiveMenu());
 })
 
-//Render category sesuai menu active 
+//Render category sesuai menu active
+let categorys = document.querySelectorAll('.item');
+
+for (const item of categorys ) {
+  
+  item.addEventListener('click', function() {
+    
+    let index = this.dataset.index;
+    
+    boxContent.innerHTML = '';
+    renderData(index)
+  })
+}
+
