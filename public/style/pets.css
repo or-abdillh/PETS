@@ -104,6 +104,10 @@
   letter-spacing: 3px;
 }
 
+.fade-in {
+  opacity: 0.7 !important;
+}
+
 .content {
   width: 100%;
   min-height: 120vh;
@@ -112,6 +116,7 @@
   padding: 1rem 1rem;
   columns: 2;
   column-gap: 0.5rem;
+  transition: 0.3s ease;
 }
 .content .item {
   background: #A7FFDB;
