@@ -1,5 +1,5 @@
 //const endpoint = "http://localhost:8000/PETS/server/rest/";
-const endpoint = "../assets/json/pets.json";
+const endpoint = "../assets/json/";
 const boxContent = document.querySelector('.content');
 
 //Template item
@@ -52,7 +52,7 @@ function checkLastUpdate(lastUpdate) {
   let now = parseInt(new Date().getTime());
   let last = parseInt(new Date(lastUpdate).getTime());
   
-  if ( now - last > 30) return true;
+  if ( now - last > 300_000) return true;
   else return false;
 }
 
@@ -102,18 +102,32 @@ window.addEventListener('load', () => {
     let param = checkLastUpdate(pets.lastUpdate)
     
     if (param) {
+      //Delete local storage PETS
+      localStorage.removeItem('PETS');
       //Fetch API CAT
-      renderData('fox');
+      renderData(
+        checkActiveMenu()
+      );
     } else {
       //Render from local storage
       pets = pets.results;
       pets.forEach(item => {
-        if (item.category == 'fox') {
-          makeElement(item.url, 'fox')
+        
+        if (item.category == checkActiveMenu()) {
+          let images = item.results;
+          images.forEach(img => {
+            makeElement(img.url, checkActiveMenu(), boxContent);
+          })
         }
       })
     }
   } else {
-    renderData('fox')
+    //Delete local storage PETS
+    localStorage.removeItem('PETS');
+    renderData(
+      checkActiveMenu()
+      );
   }
 })
+
+//Render category sesuai menu active 
